@@ -2,11 +2,10 @@
 
 #include <iostream>
 
-
-
-int main(){
+int main()
+{
     int x{readNumber()};
     int y{readNumber()};
-    writeAnswer(x+y);
+    writeAnswer(x + y);
     return 0;
 }
