@@ -17,7 +17,8 @@
                 "-std=c++23",
 				"${fileDirname}/**.cpp",
 				"-o",
-				"${fileDirname}/${fileBasenameNoExtension}"
+				"${fileDirname}/${fileBasenameNoExtension}",
+				"-I./source/includes"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
