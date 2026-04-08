@@ -1,5 +1,7 @@
 {
     "files.insertFinalNewline": true,
+    "clangd.inlayHints.parameterNames": false,
+    "editor.inlayHints.enabled": "off",
     "[cpp]": {
         "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
         "editor.formatOnType": true
