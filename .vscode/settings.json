@@ -1,3 +1,7 @@
 {
-    "files.insertFinalNewline": true
+    "files.insertFinalNewline": true,
+    "[cpp]": {
+        "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
+        "editor.formatOnType": true
+    }
 }
