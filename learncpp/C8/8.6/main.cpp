@@ -13,7 +13,7 @@ int calculate(int a, int b, char operation) {
     case '%':
       return a % b;
     default:
-      std::cout << "Invalid operator \n";
+      std::cout << "Invalid operator /n";
       return 0;
   }
 }
