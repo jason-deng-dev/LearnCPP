@@ -2,12 +2,15 @@
 #undef NDEBUG
 
 #include <cassert> // for assert
+#include <cmath>
 #include <iostream>
 
 bool isPrime(int x) {
   if (x <= 1)
     return false;
-  for (int i{2}; i < x; ++i) {
+  if (x % 2 == 0 && 2 < x)
+    return false;
+  for (int i{3}; i * i <= x; i += 2) {
     if (x % i == 0)
       return false;
   }
