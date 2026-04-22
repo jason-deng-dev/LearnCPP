@@ -2,7 +2,6 @@
 #include <ios>
 #include <iostream>
 #include <limits>
-#include <optional>
 #include <string_view>
 
 namespace Animal
@@ -33,12 +32,31 @@ constexpr Animal::Data& getAnimalData(Animal::Name name)
 	return Animal::dataArr[name];
 }
 
-void printAnimals(Animal::Name& )
+void printAnimal(const Animal::Name& n)
 {
-	
+	Animal::Data& currData = getAnimalData(n);
+	std::cout << currData.name << " has " << currData.legs << " legs and says "
+	          << currData.sound ;
 }
 
-std::optional<Animal::Name> getAnimal()
+void printAnimals(const Animal::Name& n)
+{
+	printAnimal(n);
+	std::cout << "\n \n" << "Here is the data for the rest of the animals:\n";
+
+	for (auto& name : Animal::names)
+	{
+		if (name != n)
+		{
+			printAnimal(name);
+			std::cout<< '\n';
+		}
+	}
+}
+
+
+
+Animal::Name getAnimal()
 {
 	while (true)
 	{
@@ -55,30 +73,21 @@ std::optional<Animal::Name> getAnimal()
 		}
 
 		// valid animal handling
-		bool found {false};
 		for (auto& n : Animal::names)
 		{
 			if (getAnimalData(n).name == name)
 			{
 				return n;
-      }
-			
+			}
 		}
-		if (!found)
-		{
-			std::cout << "That animal couldn't be found.\n";
-			continue;
-		}
-		
-		break;
+
+		std::cout << "That animal couldn't be found.\n";
+		continue;
 	}
 }
 
-
-
 int main()
 {
-	Animal::Name& name{getAnimal()};
-
+	printAnimals(getAnimal());
 	return 0;
 }
