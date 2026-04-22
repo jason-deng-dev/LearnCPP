@@ -13,7 +13,7 @@ AlwaysBreakTemplateDeclarations: Yes
 ReferenceAlignment: Left
 PointerAlignment: Left
 SpaceBeforeParens: ControlStatements
-AllowShortFunctionsOnASingleLine: None
+AllowShortFunctionsOnASingleLine: Inline
 PackConstructorInitializers: Never
 BreakConstructorInitializers: BeforeComma
 AllowShortIfStatementsOnASingleLine: Never

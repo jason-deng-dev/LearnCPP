@@ -1,15 +1,28 @@
+#include <cstring>
 #include <iostream>
 
 void printStr(const char str[])
 {
-	for (; *str != '\0'; ++str)
+	while (*str != '\0')
+	{
 		std::cout << *str;
+		++str;
+	}
+
 	std::cout << '\n';
 }
 
 void printStrR(const char str[])
-{ 
-	for (; )
+{
+	const char* ptr{str};
+	while (*ptr != '\0')
+		++ptr;
+
+	while (ptr-- != (str))
+	{
+		std::cout << *ptr;
+	}
+	std::cout << '\n';
 }
 
 int main()
