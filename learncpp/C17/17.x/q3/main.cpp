@@ -9,7 +9,15 @@ namespace Settings
 {
 	int player_bust_value{21};
 	int dealer_stop_value{17};
+
 }
+
+enum gameState
+{
+	lose = -1,
+	tie,
+	win,
+};
 
 struct Card
 {
@@ -163,8 +171,9 @@ bool playerTurn(Deck& deck, Player& player)
 	return false;
 }
 
-bool playRound()
+gameState playRound()
 {
+	
 	Deck deck{};
 	deck.shuffle();
 	Card& dealerCard = deck.dealCard();
@@ -180,19 +189,27 @@ bool playRound()
 	std::cout << "\nYour are showing: " << playerCard1 << " " << playerCard2
 	          << " (" << player.score << ")\n";
 	if (playerTurn(deck, player))
-		return false;
+		return gameState::lose;
 	if (dealerTurn(deck, dealer))
-		return true;
+		return gameState::win;
 
-	return player.score > dealer.score;
+	if (player.score < dealer.score)
+		return gameState::lose;
+	else if (player.score > dealer.score)
+		return gameState::win;
+	else
+		return gameState::tie;
 }
 
 int main()
 {
-	if (playRound())
+	gameState res{playRound()};
+	if (res == gameState::win)
 		std::cout << "You win!";
-	else
+	else if (res == gameState::lose)
 		std::cout << "You lose!";
+	else
+		std::cout << "Tie!";
 	std::cout << '\n';
 
 	return 0;
