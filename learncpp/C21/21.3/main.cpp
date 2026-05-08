@@ -71,13 +71,16 @@ std::istream& operator>>(std::istream& in, Fraction& a)
 	int num{};
 	char op{};
 	int denom{};
-	if (in >> num >>op>> denom && denom != 0)
-	{
-		a = Fraction{num, denom};
-	}
-	else
+
+	in >> num >> op >> denom;
+
+	if (denom == 0)
 	{
 		in.setstate(std::ios_base::failbit);
+	}
+	if (in)
+	{
+		a = Fraction{num, denom};
 	}
 
 	return in;
