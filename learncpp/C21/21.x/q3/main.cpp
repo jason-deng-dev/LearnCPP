@@ -1,6 +1,7 @@
 #include <cassert>
 #include <iostream>
 #include <ostream>
+#include <utility>
 
 class IntArray
 {
@@ -15,16 +16,14 @@ public:
 		m_startPtr = new int[len];
 	}
 
-	IntArray(const IntArray& arr)
+	IntArray(const IntArray& arr) : m_len(arr.m_len)
 	{
-		delete[] m_startPtr;
-		m_len = arr.m_len;
 		if (arr.m_startPtr)
 		{
 			m_startPtr = new int[m_len];
 			for (int i{0}; i < m_len; ++i)
 			{
-				*(m_startPtr + i) = *(arr.m_startPtr + i);
+				m_startPtr[i] = arr.m_startPtr[i];
 			}
 		}
 		else
@@ -35,7 +34,9 @@ public:
 	{
 		if (this != &source)
 		{
-			*this = *this{source};
+			IntArray temp{source};
+			this->m_len = temp.m_len;
+			std::swap(this->m_startPtr,temp.m_startPtr);
 		}
 		return *this;
 	}
@@ -78,9 +79,9 @@ int main()
 	IntArray a{fillArray()};
 
 	std::cout << a << '\n';
-
 	auto& ref{
 	    a}; // we're using this reference to avoid compiler self-assignment errors
+
 	a = ref;
 
 	IntArray b(1);
